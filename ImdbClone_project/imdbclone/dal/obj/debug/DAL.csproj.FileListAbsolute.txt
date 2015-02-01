@@ -18,3 +18,13 @@ C:\Users\ChristianRunnstrom\Dropbox\Termin 5 - Grupp11 (HT14)\Avancerade databas
 C:\Users\ChristianRunnstrom\Dropbox\Termin 5 - Grupp11 (HT14)\Avancerade databassystem (infc20)\ImdbClone_project\IMDBClone\DAL\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\ChristianRunnstrom\Dropbox\Termin 5 - Grupp11 (HT14)\Avancerade databassystem (infc20)\ImdbClone_project\IMDBClone\DAL\bin\Debug\EntityFramework.xml
 C:\Users\ChristianRunnstrom\Dropbox\Termin 5 - Grupp11 (HT14)\Avancerade databassystem (infc20)\ImdbClone_project\IMDBClone\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\DAL\bin\Debug\DAL.dll.config
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\DAL\bin\Debug\DAL.dll
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\DAL\bin\Debug\DAL.pdb
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\DAL\bin\Debug\EntityFramework.dll
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\DAL\bin\Debug\EntityFramework.xml
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\DAL\obj\Debug\DAL.dll
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\DAL\obj\Debug\DAL.pdb

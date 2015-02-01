@@ -90,3 +90,29 @@ C:\Users\ChristianRunnstrom\Dropbox\Termin 5 - Grupp11 (HT14)\Avancerade databas
 C:\Users\ChristianRunnstrom\Dropbox\Termin 5 - Grupp11 (HT14)\Avancerade databassystem (infc20)\ImdbClone_project\IMDBClone\IMDBClone\bin\Debug\DAL.pdb
 C:\Users\ChristianRunnstrom\Dropbox\Termin 5 - Grupp11 (HT14)\Avancerade databassystem (infc20)\ImdbClone_project\IMDBClone\IMDBClone\bin\Debug\EntityFramework.xml
 C:\Users\ChristianRunnstrom\Dropbox\Termin 5 - Grupp11 (HT14)\Avancerade databassystem (infc20)\ImdbClone_project\IMDBClone\IMDBClone\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\bin\Debug\IMDBCloneApplication.exe.config
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.exe
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.pdb
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\bin\Debug\IMDBCloneApplication.exe
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\bin\Debug\IMDBCloneApplication.pdb
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\bin\Debug\DAL.dll
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\bin\Debug\EntityFramework.dll
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\bin\Debug\DAL.pdb
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\bin\Debug\EntityFramework.xml
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\ImdbClone.csprojResolveAssemblyReference.cache
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.ActorForm.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.AddActor.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.AddActorsToMovies.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.AddDirector.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.AddDirectorsToMovies.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.AddGenre.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.AddMovie.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.AddMoviesToGenres.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.DirectorForm.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.Genre.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.MainForm.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.MovieForm.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.Properties.Resources.resources
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\ImdbClone.csproj.GenerateResource.Cache
