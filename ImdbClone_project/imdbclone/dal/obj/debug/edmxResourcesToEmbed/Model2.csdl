@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="imdbClone_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="imdbClone_dbEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="usp_GetAllDirectors" ReturnType="Collection(imdbClone_dbModel.usp_GetAllDirectors_Result)" />
+    <EntitySet Name="Test" EntityType="imdbClone_dbModel.Test" />
+    <FunctionImport Name="usp_GetAllTest" EntitySet="Test" ReturnType="Collection(imdbClone_dbModel.Test)" />
+  </EntityContainer>
+  <ComplexType Name="usp_GetAllDirectors_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="birthdate" Nullable="false" />
+    <Property Type="String" Name="biography" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

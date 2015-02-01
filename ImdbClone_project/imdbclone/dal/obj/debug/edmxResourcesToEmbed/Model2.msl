@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="imdbClone_dbModelStoreContainer" CdmEntityContainer="imdbClone_dbEntities">
+    <FunctionImportMapping FunctionImportName="usp_GetAllDirectors" FunctionName="imdbClone_dbModel.Store.usp_GetAllDirectors">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="imdbClone_dbModel.usp_GetAllDirectors_Result">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+          <ScalarProperty Name="biography" ColumnName="biography" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Test">
+      <EntityTypeMapping TypeName="imdbClone_dbModel.Test">
+        <MappingFragment StoreEntitySet="Test">
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetAllTest" FunctionName="imdbClone_dbModel.Store.usp_GetAllTest" />
+  </EntityContainerMapping>
+</Mapping>

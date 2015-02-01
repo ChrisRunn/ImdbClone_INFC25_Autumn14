@@ -1,0 +1,8 @@
+DELETE FROM Acted;
+DELETE FROM Directed;
+DELETE FROM MovieGenre;
+DELETE FROM Movie;
+DELETE FROM Director;
+DELETE FROM Actor;
+DELETE FROM Genre;
+DELETE FROM Audit;

@@ -1,0 +1,814 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="imdbcloneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Acted">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="birthdate" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="birthdate" Type="date" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="birthdate" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="birthdate" Type="date" Nullable="false" />
+          <Property Name="biography" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Audit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tableName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="auditData" Type="nvarchar(max)" />
+          <Property Name="userName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Directed">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="birthdate" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="birthdate" Type="date" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Director">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="birthdate" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="birthdate" Type="date" Nullable="false" />
+          <Property Name="biography" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="title" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="rank" Type="int" />
+        </EntityType>
+        <EntityType Name="MovieGenre">
+          <Key>
+            <PropertyRef Name="genre" />
+            <PropertyRef Name="title" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="genre" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Acted_name_birthdate__Actor_name_birthdate">
+          <End Role="Actor" Type="Self.Actor" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Acted" Type="Self.Acted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actor">
+              <PropertyRef Name="name" />
+              <PropertyRef Name="birthdate" />
+            </Principal>
+            <Dependent Role="Acted">
+              <PropertyRef Name="name" />
+              <PropertyRef Name="birthdate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acted_title_year__Movie_title_year">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Acted" Type="Self.Acted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="title" />
+              <PropertyRef Name="year" />
+            </Principal>
+            <Dependent Role="Acted">
+              <PropertyRef Name="title" />
+              <PropertyRef Name="year" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Directed_name_birhtdate__Director_name_birthdate">
+          <End Role="Director" Type="Self.Director" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Directed" Type="Self.Directed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Director">
+              <PropertyRef Name="name" />
+              <PropertyRef Name="birthdate" />
+            </Principal>
+            <Dependent Role="Directed">
+              <PropertyRef Name="name" />
+              <PropertyRef Name="birthdate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Directed_title_year__Movie_title_year">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Directed" Type="Self.Directed" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="title" />
+              <PropertyRef Name="year" />
+            </Principal>
+            <Dependent Role="Directed">
+              <PropertyRef Name="title" />
+              <PropertyRef Name="year" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovieGenre_genre__Genre_name">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MovieGenre" Type="Self.MovieGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="name" />
+            </Principal>
+            <Dependent Role="MovieGenre">
+              <PropertyRef Name="genre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovieGenre_title_year__Movie_title_year">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MovieGenre" Type="Self.MovieGenre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="title" />
+              <PropertyRef Name="year" />
+            </Principal>
+            <Dependent Role="MovieGenre">
+              <PropertyRef Name="title" />
+              <PropertyRef Name="year" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="usp_CreateActed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_CreateActor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+          <Parameter Name="biography" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="usp_CreateDirected" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_CreateDirector" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+          <Parameter Name="biography" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="usp_CreateGenre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_CreateMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+          <Parameter Name="description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="rank" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_CreateMovieGenre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="genre" Type="varchar" Mode="In" />
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_DeleteActed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_DeleteActor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="usp_DeleteDirected" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_DeleteDirector" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="usp_DeleteGenre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_DeleteMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_DeleteMovieGenre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="genre" Type="varchar" Mode="In" />
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_ErrorHandling" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="customizedErrorMessage" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetActedByNameOrTitle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchString" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetActorByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetActorByNameAndBirthdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="birthdate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="usp_GetAllActors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GetAllActorsForMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_GetAllDirectors" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GetAllGenres" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GetAllGenresForMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="title" Type="nvarchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_GetAllMovies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GetAllMoviesForActor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="usp_GetAllMoviesForDirector" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="usp_GetDirectedByNameOrTitle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchString" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetDirectorByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetMovieByTitle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="title" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetMovieByTitleAndYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_GetMovieGenreByGenreOrTitle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="searchString" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetMoviesByGenre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="genre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_UpdateActor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+          <Parameter Name="biography" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="usp_UpdateDirector" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="birthdate" Type="date" Mode="In" />
+          <Parameter Name="biography" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="usp_UpdateGenre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="oldName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="usp_UpdateMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="title" Type="varchar" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="rank" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="imdbcloneModelStoreContainer">
+          <EntitySet Name="Acted" EntityType="Self.Acted" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Actor" EntityType="Self.Actor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Audit" EntityType="Self.Audit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Directed" EntityType="Self.Directed" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Director" EntityType="Self.Director" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieGenre" EntityType="Self.MovieGenre" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Acted_name_birthdate__Actor_name_birthdate" Association="Self.FK_Acted_name_birthdate__Actor_name_birthdate">
+            <End Role="Actor" EntitySet="Actor" />
+            <End Role="Acted" EntitySet="Acted" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acted_title_year__Movie_title_year" Association="Self.FK_Acted_title_year__Movie_title_year">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Acted" EntitySet="Acted" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Directed_name_birhtdate__Director_name_birthdate" Association="Self.FK_Directed_name_birhtdate__Director_name_birthdate">
+            <End Role="Director" EntitySet="Director" />
+            <End Role="Directed" EntitySet="Directed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Directed_title_year__Movie_title_year" Association="Self.FK_Directed_title_year__Movie_title_year">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Directed" EntitySet="Directed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovieGenre_genre__Genre_name" Association="Self.FK_MovieGenre_genre__Genre_name">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="MovieGenre" EntitySet="MovieGenre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovieGenre_title_year__Movie_title_year" Association="Self.FK_MovieGenre_title_year__Movie_title_year">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="MovieGenre" EntitySet="MovieGenre" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="imdbcloneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="birthdate" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="biography" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Movie" Relationship="Self.Acted" FromRole="Actor" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Audit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tableName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="auditData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="userName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Director">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="birthdate" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="biography" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Movie" Relationship="Self.Directed" FromRole="Director" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="name" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Movie" Relationship="Self.MovieGenre" FromRole="Genre" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="title" />
+            <PropertyRef Name="year" />
+          </Key>
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="rank" Type="Int32" />
+          <NavigationProperty Name="Actor" Relationship="Self.Acted" FromRole="Movie" ToRole="Actor" />
+          <NavigationProperty Name="Director" Relationship="Self.Directed" FromRole="Movie" ToRole="Director" />
+          <NavigationProperty Name="Genre" Relationship="Self.MovieGenre" FromRole="Movie" ToRole="Genre" />
+        </EntityType>
+        <Association Name="Acted">
+          <End Role="Actor" Type="Self.Actor" Multiplicity="*" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+        </Association>
+        <Association Name="Directed">
+          <End Role="Director" Type="Self.Director" Multiplicity="*" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+        </Association>
+        <Association Name="MovieGenre">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="*" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="imdbcloneEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actor" EntityType="Self.Actor" />
+          <EntitySet Name="Audit" EntityType="Self.Audit" />
+          <EntitySet Name="Director" EntityType="Self.Director" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" />
+          <AssociationSet Name="Acted" Association="Self.Acted">
+            <End Role="Actor" EntitySet="Actor" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="Directed" Association="Self.Directed">
+            <End Role="Director" EntitySet="Director" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="MovieGenre" Association="Self.MovieGenre">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <FunctionImport Name="usp_GetAllActors" EntitySet="Actor" ReturnType="Collection(imdbcloneModel.Actor)" />
+          <FunctionImport Name="usp_GetActedByNameOrTitle" ReturnType="Collection(imdbcloneModel.usp_GetActedByNameOrTitle_Result)">
+          <Parameter Name="searchString" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetActorByName" EntitySet="Actor" ReturnType="Collection(imdbcloneModel.Actor)">
+          <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetAllDirectors" EntitySet="Director" ReturnType="Collection(imdbcloneModel.Director)" />
+          <FunctionImport Name="usp_GetAllGenres" EntitySet="Genre" ReturnType="Collection(imdbcloneModel.Genre)" />
+          <FunctionImport Name="usp_GetAllMovies" EntitySet="Movie" ReturnType="Collection(imdbcloneModel.Movie)" />
+          <FunctionImport Name="usp_GetAllMoviesForActor" EntitySet="Movie" ReturnType="Collection(imdbcloneModel.Movie)">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetAllMoviesForDirector" ReturnType="Collection(imdbcloneModel.usp_GetAllMoviesForDirector_Result)">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetDirectedByNameOrTitle" ReturnType="Collection(imdbcloneModel.usp_GetDirectedByNameOrTitle_Result)">
+          <Parameter Name="searchString" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetDirectorByName" EntitySet="Director" ReturnType="Collection(imdbcloneModel.Director)">
+          <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetMovieByTitle" EntitySet="Movie" ReturnType="Collection(imdbcloneModel.Movie)">
+          <Parameter Name="title" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetMovieGenreByGenreOrTitle" ReturnType="Collection(imdbcloneModel.usp_GetMovieGenreByGenreOrTitle_Result)">
+          <Parameter Name="searchString" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetMoviesByGenre" EntitySet="Movie" ReturnType="Collection(imdbcloneModel.Movie)">
+          <Parameter Name="genre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_ErrorHandling" >
+            <Parameter Name="customizedErrorMessage" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetAllActorsForMovie" EntitySet="Actor" ReturnType="Collection(imdbcloneModel.Actor)">
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetAllGenresForMovie" EntitySet="Genre" ReturnType="Collection(imdbcloneModel.Genre)">
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetMovieByTitleAndYear" EntitySet="Movie" ReturnType="Collection(imdbcloneModel.Movie)">
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetActorByNameAndBirthdate" EntitySet="Actor" ReturnType="Collection(imdbcloneModel.Actor)">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CreateActed">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CreateDirected">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CreateMovieGenre">
+            <Parameter Name="genre" Mode="In" Type="String" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_DeleteActed">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_DeleteMovieGenre">
+            <Parameter Name="genre" Mode="In" Type="String" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_DeleteDirected">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="usp_GetAllActors_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="birthdate" Nullable="false" />
+          <Property Type="String" Name="biography" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GetActedByNameOrTitle_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="birthdate" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="year" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_GetActorByName_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="birthdate" Nullable="false" />
+          <Property Type="String" Name="biography" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllDirectors_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="birthdate" Nullable="false" />
+          <Property Type="String" Name="biography" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllMovies_Result">
+          <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="year" Nullable="false" />
+          <Property Type="String" Name="description" Nullable="true" />
+          <Property Type="Int32" Name="rank" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllMoviesForActor_Result">
+          <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="year" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllMoviesForDirector_Result">
+          <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="year" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_GetDirectedByNameOrTitle_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="birthdate" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="year" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_GetDirectorByName_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="birthdate" Nullable="false" />
+          <Property Type="String" Name="biography" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="usp_GetMovieByTitle_Result">
+          <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="year" Nullable="false" />
+          <Property Type="String" Name="description" Nullable="true" />
+          <Property Type="Int32" Name="rank" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GetMovieGenreByGenreOrTitle_Result">
+          <Property Type="String" Name="genre" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="year" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_GetMoviesByGenre_Result">
+          <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="year" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllActorsByMovie_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="birthdate" Nullable="false" />
+          <Property Type="String" Name="biography" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllActorsForMovie_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="birthdate" Nullable="false" />
+          <Property Type="String" Name="biography" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GetMovieByTitleAndYear_Result">
+          <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+          <Property Type="Int32" Name="year" Nullable="false" />
+          <Property Type="String" Name="description" Nullable="true" />
+          <Property Type="Int32" Name="rank" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GetActorByNameAndBirthdate_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+          <Property Type="DateTime" Name="birthdate" Nullable="false" />
+          <Property Type="String" Name="biography" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="imdbcloneModelStoreContainer" CdmEntityContainer="imdbcloneEntities">
+          <EntitySetMapping Name="Actor">
+            <EntityTypeMapping TypeName="imdbcloneModel.Actor">
+              <MappingFragment StoreEntitySet="Actor">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="biography" ColumnName="biography" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="imdbcloneModel.Actor">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="imdbcloneModel.Store.usp_CreateActor">
+                  <ScalarProperty Name="biography" ParameterName="biography" />
+                  <ScalarProperty Name="birthdate" ParameterName="birthdate" />
+                  <ScalarProperty Name="name" ParameterName="name" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="imdbcloneModel.Store.usp_UpdateActor">
+                  <ScalarProperty Name="biography" ParameterName="biography" Version="Current" />
+                  <ScalarProperty Name="birthdate" ParameterName="birthdate" Version="Current" />
+                  <ScalarProperty Name="name" ParameterName="name" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="imdbcloneModel.Store.usp_DeleteActor">
+                  <ScalarProperty Name="birthdate" ParameterName="birthdate" />
+                  <ScalarProperty Name="name" ParameterName="name" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audit">
+            <EntityTypeMapping TypeName="imdbcloneModel.Audit">
+              <MappingFragment StoreEntitySet="Audit">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tableName" ColumnName="tableName" />
+                <ScalarProperty Name="auditData" ColumnName="auditData" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Director">
+            <EntityTypeMapping TypeName="imdbcloneModel.Director">
+              <MappingFragment StoreEntitySet="Director">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="biography" ColumnName="biography" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genre">
+            <EntityTypeMapping TypeName="imdbcloneModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movie">
+            <EntityTypeMapping TypeName="imdbcloneModel.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="imdbcloneModel.Movie">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="imdbcloneModel.Store.usp_CreateMovie">
+                  <ScalarProperty Name="rank" ParameterName="rank" />
+                  <ScalarProperty Name="description" ParameterName="description" />
+                  <ScalarProperty Name="year" ParameterName="year" />
+                  <ScalarProperty Name="title" ParameterName="title" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="imdbcloneModel.Store.usp_UpdateMovie">
+                  <ScalarProperty Name="rank" ParameterName="rank" Version="Current" />
+                  <ScalarProperty Name="description" ParameterName="description" Version="Current" />
+                  <ScalarProperty Name="year" ParameterName="year" Version="Current" />
+                  <ScalarProperty Name="title" ParameterName="title" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="imdbcloneModel.Store.usp_DeleteMovie">
+                  <ScalarProperty Name="year" ParameterName="year" />
+                  <ScalarProperty Name="title" ParameterName="title" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Acted" TypeName="imdbcloneModel.Acted" StoreEntitySet="Acted">
+            <EndProperty Name="Actor">
+              <ScalarProperty Name="name" ColumnName="name" />
+              <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+            </EndProperty>
+            <EndProperty Name="Movie">
+              <ScalarProperty Name="title" ColumnName="title" />
+              <ScalarProperty Name="year" ColumnName="year" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Directed" TypeName="imdbcloneModel.Directed" StoreEntitySet="Directed">
+            <EndProperty Name="Director">
+              <ScalarProperty Name="name" ColumnName="name" />
+              <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+            </EndProperty>
+            <EndProperty Name="Movie">
+              <ScalarProperty Name="title" ColumnName="title" />
+              <ScalarProperty Name="year" ColumnName="year" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MovieGenre" TypeName="imdbcloneModel.MovieGenre" StoreEntitySet="MovieGenre">
+            <EndProperty Name="Genre">
+              <ScalarProperty Name="name" ColumnName="genre" />
+            </EndProperty>
+            <EndProperty Name="Movie">
+              <ScalarProperty Name="title" ColumnName="title" />
+              <ScalarProperty Name="year" ColumnName="year" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllActors" FunctionName="imdbcloneModel.Store.usp_GetAllActors">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetActedByNameOrTitle" FunctionName="imdbcloneModel.Store.usp_GetActedByNameOrTitle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="imdbcloneModel.usp_GetActedByNameOrTitle_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetActorByName" FunctionName="imdbcloneModel.Store.usp_GetActorByName">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllDirectors" FunctionName="imdbcloneModel.Store.usp_GetAllDirectors">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllGenres" FunctionName="imdbcloneModel.Store.usp_GetAllGenres" />
+          <FunctionImportMapping FunctionImportName="usp_GetAllMovies" FunctionName="imdbcloneModel.Store.usp_GetAllMovies">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllMoviesForActor" FunctionName="imdbcloneModel.Store.usp_GetAllMoviesForActor">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllMoviesForDirector" FunctionName="imdbcloneModel.Store.usp_GetAllMoviesForDirector">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="imdbcloneModel.usp_GetAllMoviesForDirector_Result">
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetDirectedByNameOrTitle" FunctionName="imdbcloneModel.Store.usp_GetDirectedByNameOrTitle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="imdbcloneModel.usp_GetDirectedByNameOrTitle_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetDirectorByName" FunctionName="imdbcloneModel.Store.usp_GetDirectorByName">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetMovieByTitle" FunctionName="imdbcloneModel.Store.usp_GetMovieByTitle">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetMovieGenreByGenreOrTitle" FunctionName="imdbcloneModel.Store.usp_GetMovieGenreByGenreOrTitle">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="imdbcloneModel.usp_GetMovieGenreByGenreOrTitle_Result">
+                <ScalarProperty Name="genre" ColumnName="genre" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="year" ColumnName="year" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetMoviesByGenre" FunctionName="imdbcloneModel.Store.usp_GetMoviesByGenre">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_ErrorHandling" FunctionName="imdbcloneModel.Store.usp_ErrorHandling" />
+          <FunctionImportMapping FunctionImportName="usp_GetAllActorsForMovie" FunctionName="imdbcloneModel.Store.usp_GetAllActorsForMovie">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllGenresForMovie" FunctionName="imdbcloneModel.Store.usp_GetAllGenresForMovie" />
+          <FunctionImportMapping FunctionImportName="usp_GetMovieByTitleAndYear" FunctionName="imdbcloneModel.Store.usp_GetMovieByTitleAndYear">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetActorByNameAndBirthdate" FunctionName="imdbcloneModel.Store.usp_GetActorByNameAndBirthdate">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_CreateActed" FunctionName="imdbcloneModel.Store.usp_CreateActed" />
+          <FunctionImportMapping FunctionImportName="usp_CreateDirected" FunctionName="imdbcloneModel.Store.usp_CreateDirected" />
+          <FunctionImportMapping FunctionImportName="usp_CreateMovieGenre" FunctionName="imdbcloneModel.Store.usp_CreateMovieGenre" />
+          <FunctionImportMapping FunctionImportName="usp_DeleteActed" FunctionName="imdbcloneModel.Store.usp_DeleteActed" />
+          <FunctionImportMapping FunctionImportName="usp_DeleteMovieGenre" FunctionName="imdbcloneModel.Store.usp_DeleteMovieGenre" />
+          <FunctionImportMapping FunctionImportName="usp_DeleteDirected" FunctionName="imdbcloneModel.Store.usp_DeleteDirected" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

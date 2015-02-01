@@ -1,0 +1,251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="imdbcloneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Actor">
+    <Key>
+      <PropertyRef Name="name" />
+      <PropertyRef Name="birthdate" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="biography" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movie" Relationship="Self.Acted" FromRole="Actor" ToRole="Movie" />
+  </EntityType>
+  <EntityType Name="Audit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tableName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="auditData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="userName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Director">
+    <Key>
+      <PropertyRef Name="name" />
+      <PropertyRef Name="birthdate" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="biography" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movie" Relationship="Self.Directed" FromRole="Director" ToRole="Movie" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="name" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Movie" Relationship="Self.MovieGenre" FromRole="Genre" ToRole="Movie" />
+  </EntityType>
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="title" />
+      <PropertyRef Name="year" />
+    </Key>
+    <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="year" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="rank" Type="Int32" />
+    <NavigationProperty Name="Actor" Relationship="Self.Acted" FromRole="Movie" ToRole="Actor" />
+    <NavigationProperty Name="Director" Relationship="Self.Directed" FromRole="Movie" ToRole="Director" />
+    <NavigationProperty Name="Genre" Relationship="Self.MovieGenre" FromRole="Movie" ToRole="Genre" />
+  </EntityType>
+  <Association Name="Acted">
+    <End Role="Actor" Type="Self.Actor" Multiplicity="*" />
+    <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+  </Association>
+  <Association Name="Directed">
+    <End Role="Director" Type="Self.Director" Multiplicity="*" />
+    <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+  </Association>
+  <Association Name="MovieGenre">
+    <End Role="Genre" Type="Self.Genre" Multiplicity="*" />
+    <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="imdbcloneEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Actor" EntityType="Self.Actor" />
+    <EntitySet Name="Audit" EntityType="Self.Audit" />
+    <EntitySet Name="Director" EntityType="Self.Director" />
+    <EntitySet Name="Genre" EntityType="Self.Genre" />
+    <EntitySet Name="Movie" EntityType="Self.Movie" />
+    <AssociationSet Name="Acted" Association="Self.Acted">
+      <End Role="Actor" EntitySet="Actor" />
+      <End Role="Movie" EntitySet="Movie" />
+    </AssociationSet>
+    <AssociationSet Name="Directed" Association="Self.Directed">
+      <End Role="Director" EntitySet="Director" />
+      <End Role="Movie" EntitySet="Movie" />
+    </AssociationSet>
+    <AssociationSet Name="MovieGenre" Association="Self.MovieGenre">
+      <End Role="Genre" EntitySet="Genre" />
+      <End Role="Movie" EntitySet="Movie" />
+    </AssociationSet>
+    <FunctionImport Name="usp_GetAllActors" EntitySet="Actor" ReturnType="Collection(imdbcloneModel.Actor)" />
+    <FunctionImport Name="usp_GetActedByNameOrTitle" ReturnType="Collection(imdbcloneModel.usp_GetActedByNameOrTitle_Result)">
+      <Parameter Name="searchString" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetActorByName" EntitySet="Actor" ReturnType="Collection(imdbcloneModel.Actor)">
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetAllDirectors" EntitySet="Director" ReturnType="Collection(imdbcloneModel.Director)" />
+    <FunctionImport Name="usp_GetAllGenres" EntitySet="Genre" ReturnType="Collection(imdbcloneModel.Genre)" />
+    <FunctionImport Name="usp_GetAllMovies" EntitySet="Movie" ReturnType="Collection(imdbcloneModel.Movie)" />
+    <FunctionImport Name="usp_GetAllMoviesForActor" EntitySet="Movie" ReturnType="Collection(imdbcloneModel.Movie)">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetAllMoviesForDirector" ReturnType="Collection(imdbcloneModel.usp_GetAllMoviesForDirector_Result)">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetDirectedByNameOrTitle" ReturnType="Collection(imdbcloneModel.usp_GetDirectedByNameOrTitle_Result)">
+      <Parameter Name="searchString" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetDirectorByName" EntitySet="Director" ReturnType="Collection(imdbcloneModel.Director)">
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetMovieByTitle" EntitySet="Movie" ReturnType="Collection(imdbcloneModel.Movie)">
+      <Parameter Name="title" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetMovieGenreByGenreOrTitle" ReturnType="Collection(imdbcloneModel.usp_GetMovieGenreByGenreOrTitle_Result)">
+      <Parameter Name="searchString" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetMoviesByGenre" EntitySet="Movie" ReturnType="Collection(imdbcloneModel.Movie)">
+      <Parameter Name="genre" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_ErrorHandling">
+      <Parameter Name="customizedErrorMessage" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetAllActorsForMovie" EntitySet="Actor" ReturnType="Collection(imdbcloneModel.Actor)">
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetAllGenresForMovie" EntitySet="Genre" ReturnType="Collection(imdbcloneModel.Genre)">
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetMovieByTitleAndYear" EntitySet="Movie" ReturnType="Collection(imdbcloneModel.Movie)">
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetActorByNameAndBirthdate" EntitySet="Actor" ReturnType="Collection(imdbcloneModel.Actor)">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="usp_CreateActed">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_CreateDirected">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_CreateMovieGenre">
+      <Parameter Name="genre" Mode="In" Type="String" />
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DeleteActed">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DeleteMovieGenre">
+      <Parameter Name="genre" Mode="In" Type="String" />
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DeleteDirected">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="birthdate" Mode="In" Type="DateTime" />
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="usp_GetAllActors_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="birthdate" Nullable="false" />
+    <Property Type="String" Name="biography" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_GetActedByNameOrTitle_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="birthdate" Nullable="false" />
+    <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="year" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="usp_GetActorByName_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="birthdate" Nullable="false" />
+    <Property Type="String" Name="biography" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAllDirectors_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="birthdate" Nullable="false" />
+    <Property Type="String" Name="biography" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAllMovies_Result">
+    <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="year" Nullable="false" />
+    <Property Type="String" Name="description" Nullable="true" />
+    <Property Type="Int32" Name="rank" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAllMoviesForActor_Result">
+    <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="year" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAllMoviesForDirector_Result">
+    <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="year" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="usp_GetDirectedByNameOrTitle_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="birthdate" Nullable="false" />
+    <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="year" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="usp_GetDirectorByName_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="birthdate" Nullable="false" />
+    <Property Type="String" Name="biography" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_GetMovieByTitle_Result">
+    <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="year" Nullable="false" />
+    <Property Type="String" Name="description" Nullable="true" />
+    <Property Type="Int32" Name="rank" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_GetMovieGenreByGenreOrTitle_Result">
+    <Property Type="String" Name="genre" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="year" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="usp_GetMoviesByGenre_Result">
+    <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="year" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAllActorsByMovie_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="birthdate" Nullable="false" />
+    <Property Type="String" Name="biography" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAllActorsForMovie_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="birthdate" Nullable="false" />
+    <Property Type="String" Name="biography" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_GetMovieByTitleAndYear_Result">
+    <Property Type="String" Name="title" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="year" Nullable="false" />
+    <Property Type="String" Name="description" Nullable="true" />
+    <Property Type="Int32" Name="rank" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_GetActorByNameAndBirthdate_Result">
+    <Property Type="String" Name="name" Nullable="false" MaxLength="255" />
+    <Property Type="DateTime" Name="birthdate" Nullable="false" />
+    <Property Type="String" Name="biography" Nullable="true" />
+  </ComplexType>
+</Schema>

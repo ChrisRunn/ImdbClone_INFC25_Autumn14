@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="imdbClone_dbModelStoreContainer" CdmEntityContainer="imdbClone_dbEntities1">
+    <EntitySetMapping Name="Actor">
+      <EntityTypeMapping TypeName="imdbClone_dbModel.Actor">
+        <MappingFragment StoreEntitySet="Actor">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+          <ScalarProperty Name="biography" ColumnName="biography" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Audit">
+      <EntityTypeMapping TypeName="imdbClone_dbModel.Audit">
+        <MappingFragment StoreEntitySet="Audit">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tableName" ColumnName="tableName" />
+          <ScalarProperty Name="auditData" ColumnName="auditData" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Director">
+      <EntityTypeMapping TypeName="imdbClone_dbModel.Director">
+        <MappingFragment StoreEntitySet="Director">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+          <ScalarProperty Name="biography" ColumnName="biography" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genre">
+      <EntityTypeMapping TypeName="imdbClone_dbModel.Genre">
+        <MappingFragment StoreEntitySet="Genre">
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movie">
+      <EntityTypeMapping TypeName="imdbClone_dbModel.Movie">
+        <MappingFragment StoreEntitySet="Movie">
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="rank" ColumnName="rank" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Acted" TypeName="imdbClone_dbModel.Acted" StoreEntitySet="Acted">
+      <EndProperty Name="Actor">
+        <ScalarProperty Name="name" ColumnName="name" />
+        <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+      </EndProperty>
+      <EndProperty Name="Movie">
+        <ScalarProperty Name="title" ColumnName="title" />
+        <ScalarProperty Name="year" ColumnName="year" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Directed" TypeName="imdbClone_dbModel.Directed" StoreEntitySet="Directed">
+      <EndProperty Name="Director">
+        <ScalarProperty Name="name" ColumnName="name" />
+        <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+      </EndProperty>
+      <EndProperty Name="Movie">
+        <ScalarProperty Name="title" ColumnName="title" />
+        <ScalarProperty Name="year" ColumnName="year" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MovieGenre" TypeName="imdbClone_dbModel.MovieGenre" StoreEntitySet="MovieGenre">
+      <EndProperty Name="Genre">
+        <ScalarProperty Name="name" ColumnName="genre" />
+      </EndProperty>
+      <EndProperty Name="Movie">
+        <ScalarProperty Name="title" ColumnName="title" />
+        <ScalarProperty Name="year" ColumnName="year" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="getAllMovies" FunctionName="imdbClone_dbModel.Store.usp_GetAllMovies" />
+  </EntityContainerMapping>
+</Mapping>
