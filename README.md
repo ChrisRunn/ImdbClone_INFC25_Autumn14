@@ -38,7 +38,7 @@ is usable without re-creating the database and changing the connection string.
 ## Contributors
  
 Daniel Lindén - [LinkedIn](https://se.linkedin.com/in/daniellinden22)  
-Sebastian Glad - 
-Christian Runnström - [LinkedIn](https://se.linkedin.com/pub/christian-runnström/a4/606/592)
-Anton Hollerup - [LinkedIn](https://se.linkedin.com/pub/anton-hollerup/93/b5b/14a)
+Sebastian Glad -  
+Christian Runnström - [LinkedIn](https://se.linkedin.com/pub/christian-runnström/a4/606/592)  
+Anton Hollerup - [LinkedIn](https://se.linkedin.com/pub/anton-hollerup/93/b5b/14a)  
 
