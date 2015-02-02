@@ -116,3 +116,6 @@ C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclo
 C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.MovieForm.resources
 C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.Properties.Resources.resources
 C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_HT15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\ImdbClone.csproj.GenerateResource.Cache
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_Autumn15\ImdbClone_project\imdbclone\IMDBClone\bin\Debug\IMDBCloneApplication.exe.config
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_Autumn15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.exe
+C:\Users\Daniel\Documents\GitHub\ImdbClone_INFC25_Autumn15\ImdbClone_project\imdbclone\IMDBClone\obj\Debug\IMDBCloneApplication.pdb
